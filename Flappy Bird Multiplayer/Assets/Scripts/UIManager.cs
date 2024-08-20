@@ -7,8 +7,8 @@ using UnityEngine.SceneManagement;
 public class UIManager : MonoBehaviour
 {
 
-    TextMeshProUGUI scoreText, finalScoreText, recordText;
-    GameObject gameOverWindow;
+    [SerializeField] TextMeshProUGUI scoreText, finalScoreText, recordText;
+    [SerializeField] GameObject gameOverWindow;
 
     public void UpdateScoreText()
     {
