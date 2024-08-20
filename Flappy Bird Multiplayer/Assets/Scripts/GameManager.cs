@@ -17,8 +17,14 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        screenBounds = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, Screen.height));
     }
     #endregion
 
+    Vector2 screenBounds;
+    int score;
 
+    public Vector2 ScreenBounds { get => screenBounds; }
+    public int Score { get => score; set => score = value; }
 }
