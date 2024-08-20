@@ -4,15 +4,46 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    const float jumpForce = 8;
+    Rigidbody2D rigidbody2D;
+    UIManager managerUI;
+
+    private void Start()
     {
-        
+        rigidbody2D = GetComponent<Rigidbody2D>();
+        managerUI = FindObjectOfType<UIManager>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        if(Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            rigidbody2D.velocity = Vector3.zero;
+            rigidbody2D.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.tag == "Obstacle")
+        {
+            GameOver();
+        }
+        else if(collision.gameObject.tag == "Score")
+        {
+            //Score++
+            //Atualiza ScoreText
+        }
+    }
+
+    void GameOver()
+    {
+        /*
+        if(PlayerPrefs.GetInt("Record") < GameManager.instance.Score)
+        {
+            PlayerPrefs.SetInt("Record", GameManager.instance.Score);
+        }
+        managerUI.GameOver();
+        */
     }
 }
