@@ -31,19 +31,19 @@ public class Player : MonoBehaviour
         }
         else if(collision.gameObject.tag == "Score")
         {
-            //Score++
-            //Atualiza ScoreText
+            GameManager.instance.Score++;
+            managerUI.UpdateScoreText();
         }
     }
 
     void GameOver()
     {
-        /*
+        
         if(PlayerPrefs.GetInt("Record") < GameManager.instance.Score)
         {
             PlayerPrefs.SetInt("Record", GameManager.instance.Score);
         }
         managerUI.GameOver();
-        */
+        
     }
 }

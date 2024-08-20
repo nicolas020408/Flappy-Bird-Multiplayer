@@ -15,11 +15,11 @@ public class Obstacles : MonoBehaviour
 
     private void Update()
     {
-        /*
+        
         if(transform.position.x < -GameManager.instance.ScreenBounds.x)
         {
             Destroy(gameObject);
-        }*/
+        }
 
         rigidbody2D.velocity = Vector2.left * speed;
     }

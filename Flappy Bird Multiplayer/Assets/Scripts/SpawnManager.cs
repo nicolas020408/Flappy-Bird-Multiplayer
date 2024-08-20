@@ -15,7 +15,7 @@ public class SpawnManager : MonoBehaviour
         {
             clock = cooldown;
 
-            //Instantiate(obstaclePrefab, new Vector2(GameManager.instance.ScreenBounds.x, Random.Range(-2,2)), Quaternion.identity);
+            Instantiate(obstaclePrefab, new Vector2(GameManager.instance.ScreenBounds.x, Random.Range(-2,2)), Quaternion.identity);
         }
         else
         {
