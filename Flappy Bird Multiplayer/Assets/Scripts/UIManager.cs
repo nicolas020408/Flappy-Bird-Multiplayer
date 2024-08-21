@@ -6,6 +6,14 @@ using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
+    #region Singleton
+    public static UIManager instance;
+
+    private void Awake()
+    {
+        instance = this;
+    }
+    #endregion
 
     [SerializeField] TextMeshProUGUI scoreText, finalScoreText, recordText;
     [SerializeField] GameObject gameOverWindow;

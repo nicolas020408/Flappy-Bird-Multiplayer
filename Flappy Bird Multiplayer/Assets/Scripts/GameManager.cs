@@ -57,5 +57,6 @@ public class GameManager : MonoBehaviourPun
     public void SetScore(int value)
     {
         score += value;
+        UIManager.instance.UpdateScoreText();
     }
 }

@@ -7,14 +7,12 @@ public class Player : MonoBehaviourPun
 {
     const float jumpForce = 8;
     Rigidbody2D rigidbody2D;
-    UIManager managerUI;
 
     bool controllerOn = true;
 
-    private void Start()
+    private void Awake()
     {
         rigidbody2D = GetComponent<Rigidbody2D>();
-        managerUI = FindObjectOfType<UIManager>();
     }
 
     [PunRPC]
@@ -22,7 +20,7 @@ public class Player : MonoBehaviourPun
     {
         if (!photonView.IsMine)
         {
-            
+            rigidbody2D.isKinematic = true;
             controllerOn = false;
         }
     }
@@ -48,7 +46,6 @@ public class Player : MonoBehaviourPun
             else if (collision.gameObject.tag == "Score")
             {
                 GameManager.instance.photonView.RPC("SetScore", RpcTarget.All, 1);
-                managerUI.UpdateScoreText();
             }
         }
     }
@@ -60,7 +57,7 @@ public class Player : MonoBehaviourPun
         {
             PlayerPrefs.SetInt("Record", GameManager.instance.Score);
         }
-        managerUI.GameOver();
+        UIManager.instance.GameOver();
         
     }
 }
