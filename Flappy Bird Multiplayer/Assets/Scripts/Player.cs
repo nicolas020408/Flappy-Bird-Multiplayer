@@ -38,14 +38,17 @@ public class Player : MonoBehaviourPun
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "Obstacle")
+        if (controllerOn)
         {
-            GameOver();
-        }
-        else if(collision.gameObject.tag == "Score")
-        {
-            GameManager.instance.Score++;
-            managerUI.UpdateScoreText();
+            if (collision.gameObject.tag == "Obstacle")
+            {
+                GameOver();
+            }
+            else if (collision.gameObject.tag == "Score")
+            {
+                GameManager.instance.Score++;
+                managerUI.UpdateScoreText();
+            }
         }
     }
 

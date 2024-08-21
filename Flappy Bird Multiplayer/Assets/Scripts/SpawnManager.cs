@@ -7,19 +7,22 @@ public class SpawnManager : MonoBehaviour
     float clock;
     const float cooldown = 2;
 
-    [SerializeField] GameObject obstaclePrefab;
+    string obstaclePrefab = "Prefabs/Obstacle";
 
     private void Update()
     {
-        if(clock <= 0)
+        if (NetworkManager.instance.IsMasterClient)
         {
-            clock = cooldown;
+            if (clock <= 0)
+            {
+                clock = cooldown;
 
-            Instantiate(obstaclePrefab, new Vector2(GameManager.instance.ScreenBounds.x, Random.Range(-2,2)), Quaternion.identity);
-        }
-        else
-        {
-            clock -= Time.deltaTime;
+                NetworkManager.instance.Instantiate(obstaclePrefab, new Vector2(GameManager.instance.ScreenBounds.x, Random.Range(-2, 2)), Quaternion.identity);
+            }
+            else
+            {
+                clock -= Time.deltaTime;
+            }
         }
     }
 
