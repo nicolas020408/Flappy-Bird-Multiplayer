@@ -1,8 +1,9 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class GameManager : MonoBehaviourPun
 {
     #region Singleton
     public static GameManager instance;
@@ -27,4 +28,28 @@ public class GameManager : MonoBehaviour
 
     public Vector2 ScreenBounds { get => screenBounds; }
     public int Score { get => score; set => score = value; }
+
+    const string playerPrefabPath = "Prefabs/Player";
+    int playersInGame = 0;
+
+    private void Start()
+    {
+        photonView.RPC("AddPlayer", RpcTarget.AllBuffered);
+    }
+
+    private void CreatePlayer()
+    {
+        Player player = NetworkManager.instance.Instantiate(playerPrefabPath, new Vector3(30, 1, 30), Quaternion.identity).GetComponent<Player>();
+        player.photonView.RPC("Initialize", RpcTarget.All);
+    }
+
+    [PunRPC]
+    private void AddPlayer()
+    {
+        playersInGame++;
+        if (playersInGame == PhotonNetwork.PlayerList.Length)
+        {
+            CreatePlayer();
+        }
+    }
 }

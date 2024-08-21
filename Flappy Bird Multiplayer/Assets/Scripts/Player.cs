@@ -1,17 +1,30 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviourPun
 {
     const float jumpForce = 8;
     Rigidbody2D rigidbody2D;
     UIManager managerUI;
 
+    bool controllerOn;
+
     private void Start()
     {
         rigidbody2D = GetComponent<Rigidbody2D>();
         managerUI = FindObjectOfType<UIManager>();
+    }
+
+    [PunRPC]
+    private void Initialize()
+    {
+        if (!photonView.IsMine)
+        {
+            
+            controllerOn = false;
+        }
     }
 
     private void Update()
