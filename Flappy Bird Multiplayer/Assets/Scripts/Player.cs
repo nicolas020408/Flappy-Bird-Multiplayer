@@ -42,11 +42,12 @@ public class Player : MonoBehaviourPun
         {
             if (collision.gameObject.tag == "Obstacle")
             {
-                GameOver();
+                //GameOver();
+                GameManager.instance.photonView.RPC("SetScore", RpcTarget.All, -10);
             }
             else if (collision.gameObject.tag == "Score")
             {
-                GameManager.instance.Score++;
+                GameManager.instance.photonView.RPC("SetScore", RpcTarget.All, 1);
                 managerUI.UpdateScoreText();
             }
         }

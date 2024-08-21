@@ -52,4 +52,10 @@ public class GameManager : MonoBehaviourPun
             CreatePlayer();
         }
     }
+
+    [PunRPC]
+    public void SetScore(int value)
+    {
+        score += value;
+    }
 }
