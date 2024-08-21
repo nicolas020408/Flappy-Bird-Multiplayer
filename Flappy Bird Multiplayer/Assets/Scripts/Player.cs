@@ -29,7 +29,7 @@ public class Player : MonoBehaviourPun
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Mouse0))
+        if(Input.GetKeyDown(KeyCode.Mouse0) && controllerOn)
         {
             rigidbody2D.velocity = Vector3.zero;
             rigidbody2D.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
