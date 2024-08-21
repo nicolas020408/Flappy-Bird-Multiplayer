@@ -9,7 +9,7 @@ public class Player : MonoBehaviourPun
     Rigidbody2D rigidbody2D;
     UIManager managerUI;
 
-    bool controllerOn;
+    bool controllerOn = true;
 
     private void Start()
     {
