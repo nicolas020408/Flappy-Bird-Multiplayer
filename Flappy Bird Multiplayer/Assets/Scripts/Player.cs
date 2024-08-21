@@ -9,6 +9,19 @@ public class Player : MonoBehaviourPun
     Rigidbody2D rigidbody2D;
 
     bool controllerOn = true;
+    
+    int lifes = 10;
+
+    [PunRPC]
+    void ReduceLife()
+    {
+        lifes--;
+
+        if( lifes == 0)
+        {
+            GameOver();
+        }
+    }
 
     private void Awake()
     {
@@ -43,7 +56,7 @@ public class Player : MonoBehaviourPun
         {
             if (collision.gameObject.tag == "Obstacle")
             {
-                //GameOver();
+                photonView.RPC("ReduceLife", RpcTarget.All);
                 GameManager.instance.photonView.RPC("SetScore", RpcTarget.All, -10);
             }
             else if (collision.gameObject.tag == "Score")
