@@ -20,6 +20,9 @@ public class Player : MonoBehaviourPun
     {
         if (!photonView.IsMine)
         {
+            Color color = Color.white;
+            color.a = 0.1f;
+            GetComponent<SpriteRenderer>().color = color;
             rigidbody2D.isKinematic = true;
             controllerOn = false;
         }
