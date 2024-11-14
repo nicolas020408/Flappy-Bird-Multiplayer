@@ -11,28 +11,12 @@ public class UIManager : MonoBehaviour
 
     public void UpdateScoreText()
     {
-        // Usando um laço para atualizar textos
-        TextMeshProUGUI[] texts = { scoreText, finalScoreText, recordText };
-        foreach (TextMeshProUGUI text in texts)
-        {
-            if (text == scoreText)
-            {
-                text.text = GameManager.instance.Score.ToString();
-            }
-            else if (text == finalScoreText)
-            {
-                text.text = GameManager.instance.Score.ToString();
-            }
-            else if (text == recordText)
-            {
-                text.text = PlayerPrefs.GetInt("Record").ToString();
-            }
-        }
+        scoreText.text = GameManager.instance.GetScore().ToString();
     }
 
     public void GameOver()
     {
-        finalScoreText.text = GameManager.instance.Score.ToString();
+        finalScoreText.text = GameManager.instance.GetScore().ToString();
         recordText.text = PlayerPrefs.GetInt("Record").ToString();
         gameOverWindow.SetActive(true);
         Time.timeScale = 0;
@@ -44,4 +28,7 @@ public class UIManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
+
+
+
 

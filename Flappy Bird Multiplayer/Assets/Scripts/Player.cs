@@ -16,7 +16,6 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        // Verificar se o jogador apertou qualquer tecla de "pulo"
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             rigidbody2D.velocity = Vector3.zero;
@@ -26,11 +25,18 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // Usando um laço para verificar múltiplos tipos de colisões
-        string[] tags = { "Obstacle", "Score" };
-        foreach (string tag in tags)
+        // Laço para lidar com múltiplos tipos de colisões
+        HandleCollisions(collision.gameObject);
+    }
+
+    // Método para tratar diferentes tipos de colisões
+    void HandleCollisions(GameObject collidedObject)
+    {
+        string[] collisionTags = { "Obstacle", "Score" };
+
+        foreach (string tag in collisionTags)
         {
-            if (collision.gameObject.tag == tag)
+            if (collidedObject.CompareTag(tag))
             {
                 if (tag == "Obstacle")
                 {
@@ -38,7 +44,7 @@ public class Player : MonoBehaviour
                 }
                 else if (tag == "Score")
                 {
-                    GameManager.instance.Score++;
+                    GameManager.instance.UpdateScore(1); // Aumenta a pontuação
                     managerUI.UpdateScoreText();
                 }
             }
@@ -47,11 +53,14 @@ public class Player : MonoBehaviour
 
     void GameOver()
     {
-        if (PlayerPrefs.GetInt("Record") < GameManager.instance.Score)
+        if (PlayerPrefs.GetInt("Record") < GameManager.instance.GetScore())
         {
-            PlayerPrefs.SetInt("Record", GameManager.instance.Score);
+            PlayerPrefs.SetInt("Record", GameManager.instance.GetScore());
         }
         managerUI.GameOver();
     }
 }
+
+
+
 

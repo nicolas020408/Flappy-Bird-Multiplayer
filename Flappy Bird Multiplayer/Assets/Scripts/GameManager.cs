@@ -23,30 +23,23 @@ public class GameManager : MonoBehaviour
     #endregion
 
     Vector2 screenBounds;
-    public int[] scores = new int[5];  // Array de pontuação para múltiplos jogadores
+    public int score = 0;  // Pontuação geral
 
     public Vector2 ScreenBounds { get => screenBounds; }
 
-    // Método para ajustar a pontuação de um jogador específico
-    public void SetScore(int playerIndex, int score)
+    // Método para atualizar a pontuação
+    public void UpdateScore(int value)
     {
-        if (playerIndex >= 0 && playerIndex < scores.Length)
-        {
-            scores[playerIndex] = score;
-        }
-        else
-        {
-            Debug.LogWarning("Índice do jogador inválido");
-        }
+        score += value;
+        Debug.Log("Pontuação Atual: " + score);
     }
 
-    // Método para exibir as pontuações de todos os jogadores
-    public void DisplayAllScores()
+    // Método para obter a pontuação
+    public int GetScore()
     {
-        for (int i = 0; i < scores.Length; i++)
-        {
-            Debug.Log("Jogador " + (i + 1) + " Pontuação: " + scores[i]);
-        }
+        return score;
     }
 }
+
+
 
