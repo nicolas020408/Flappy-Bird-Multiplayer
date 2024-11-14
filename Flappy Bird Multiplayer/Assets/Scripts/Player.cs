@@ -14,7 +14,7 @@ public class Player : MonoBehaviour
         managerUI = FindObjectOfType<UIManager>();
     }
 
-    private void Update()
+    private void Update() //
     {
         if(Input.GetKeyDown(KeyCode.Mouse0))
         {
