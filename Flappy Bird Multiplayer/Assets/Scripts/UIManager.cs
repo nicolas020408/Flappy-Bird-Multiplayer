@@ -6,13 +6,28 @@ using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
-
     [SerializeField] TextMeshProUGUI scoreText, finalScoreText, recordText;
     [SerializeField] GameObject gameOverWindow;
 
     public void UpdateScoreText()
     {
-        scoreText.text = GameManager.instance.Score.ToString();
+        // Usando um laço para atualizar textos
+        TextMeshProUGUI[] texts = { scoreText, finalScoreText, recordText };
+        foreach (TextMeshProUGUI text in texts)
+        {
+            if (text == scoreText)
+            {
+                text.text = GameManager.instance.Score.ToString();
+            }
+            else if (text == finalScoreText)
+            {
+                text.text = GameManager.instance.Score.ToString();
+            }
+            else if (text == recordText)
+            {
+                text.text = PlayerPrefs.GetInt("Record").ToString();
+            }
+        }
     }
 
     public void GameOver()
@@ -29,3 +44,4 @@ public class UIManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
+

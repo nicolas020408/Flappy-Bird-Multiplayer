@@ -14,9 +14,10 @@ public class Player : MonoBehaviour
         managerUI = FindObjectOfType<UIManager>();
     }
 
-    private void Update() //
+    private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Mouse0))
+        // Verificar se o jogador apertou qualquer tecla de "pulo"
+        if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             rigidbody2D.velocity = Vector3.zero;
             rigidbody2D.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
@@ -25,25 +26,32 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "Obstacle")
+        // Usando um laço para verificar múltiplos tipos de colisões
+        string[] tags = { "Obstacle", "Score" };
+        foreach (string tag in tags)
         {
-            GameOver();
-        }
-        else if(collision.gameObject.tag == "Score")
-        {
-            GameManager.instance.Score++;
-            managerUI.UpdateScoreText();
+            if (collision.gameObject.tag == tag)
+            {
+                if (tag == "Obstacle")
+                {
+                    GameOver();
+                }
+                else if (tag == "Score")
+                {
+                    GameManager.instance.Score++;
+                    managerUI.UpdateScoreText();
+                }
+            }
         }
     }
 
     void GameOver()
     {
-        
-        if(PlayerPrefs.GetInt("Record") < GameManager.instance.Score)
+        if (PlayerPrefs.GetInt("Record") < GameManager.instance.Score)
         {
             PlayerPrefs.SetInt("Record", GameManager.instance.Score);
         }
         managerUI.GameOver();
-        
     }
 }
+

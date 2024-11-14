@@ -1,11 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Obstacles : MonoBehaviour
 {
     float speed = 3.5f;
-
     Rigidbody2D rigidbody2D;
 
     private void Start()
@@ -15,8 +12,8 @@ public class Obstacles : MonoBehaviour
 
     private void Update()
     {
-        
-        if(transform.position.x < -GameManager.instance.ScreenBounds.x)
+        // Usar laço para mover múltiplos obstáculos se necessário
+        if (transform.position.x < -GameManager.instance.ScreenBounds.x)
         {
             Destroy(gameObject);
         }
@@ -24,3 +21,4 @@ public class Obstacles : MonoBehaviour
         rigidbody2D.velocity = Vector2.left * speed;
     }
 }
+

@@ -9,11 +9,11 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        if(instance == null)
+        if (instance == null)
         {
             instance = this;
         }
-        else if(instance != this)
+        else if (instance != this)
         {
             Destroy(gameObject);
         }
@@ -23,8 +23,30 @@ public class GameManager : MonoBehaviour
     #endregion
 
     Vector2 screenBounds;
-    int score;
+    public int[] scores = new int[5];  // Array de pontuação para múltiplos jogadores
 
     public Vector2 ScreenBounds { get => screenBounds; }
-    public int Score { get => score; set => score = value; }
+
+    // Método para ajustar a pontuação de um jogador específico
+    public void SetScore(int playerIndex, int score)
+    {
+        if (playerIndex >= 0 && playerIndex < scores.Length)
+        {
+            scores[playerIndex] = score;
+        }
+        else
+        {
+            Debug.LogWarning("Índice do jogador inválido");
+        }
+    }
+
+    // Método para exibir as pontuações de todos os jogadores
+    public void DisplayAllScores()
+    {
+        for (int i = 0; i < scores.Length; i++)
+        {
+            Debug.Log("Jogador " + (i + 1) + " Pontuação: " + scores[i]);
+        }
+    }
 }
+
